@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Caserage/tinkerforge-ws.svg?branch=master)](https://travis-ci.org/Caserage/tinkerforge-ws)
+
 # tinkerforge-ws
 This project implements the Tinkerforge weatherstation from the [kit](https://www.tinkerforge.com/de/doc/Kits/WeatherStation/WeatherStation.html).
 
