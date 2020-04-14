@@ -1,0 +1,9 @@
+os:
+  - osx
+  - win
+  - linux
+
+language: node_js
+version:
+  - "12"
+  - "13"

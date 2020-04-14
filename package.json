@@ -4,6 +4,7 @@
   "description": "Project implementing the Tinkerforge weatherstation.",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/Caserage/tinkerforge-ws/issues"
   },
-  "homepage": "https://github.com/Caserage/tinkerforge-ws#readme"
+  "homepage": "https://github.com/Caserage/tinkerforge-ws#readme",
+  "dependencies": {
+    "tinkerforge": "^2.1.26"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
 }
