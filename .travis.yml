@@ -4,6 +4,6 @@ os:
   - linux
 
 language: node_js
-version:
+node_js:
   - "12"
   - "13"
