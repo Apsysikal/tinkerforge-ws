@@ -2,7 +2,7 @@
 /// <reference path="./node_modules/tinkerforge/Tinkerforge.js" />
 
 function hello(user: string): void {
-    console.log(`Hello ${user}`);
+  console.log(`Hello ${user}`);
 }
 
 hello('World');
