@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 declare module 'tinkerforge' {
@@ -40,7 +41,7 @@ declare module 'tinkerforge' {
     const TASK_KIND_DISCONNECT: number;
   }
 
-  class IPConnection {
+  export class IPConnection {
     constructor();
     /**
      * Creates a TCP/IP connection to the given host and port. The host and port can refer to a Brick Daemon or to a WIFI/Ethernet Extension.
@@ -108,7 +109,7 @@ declare module 'tinkerforge' {
      * @param id
      * @param returnCallback
      */
-    on(id: number, returnCallback: (params: unknown) => void): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
   }
 
   export namespace BrickMaster {
@@ -330,29 +331,29 @@ declare module 'tinkerforge' {
     const WIFI_STATE_DISASSOCIATED: number;
     const WIFI_STATE_ERROR: number;
     const WIFI_STATE_NOT_INITIALIZED_YET: number;
+  }
 
-    class BrickMaster {
-      constructor(uid: string, ipConnection: IPConnection);
-      /**
-       * Returns the stack voltage. The stack voltage is the voltage that is supplied via the stack, i.e. it is given by a Step-Down or Step-Up Power Supply.
-       * @param returnCallback
-       * @param errorCallback
-       */
-      getStackVoltage(
-        returnCallback?: (voltage: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      /**
-       * Returns the stack current. The stack current is the current that is drawn via the stack, i.e. it is given by a Step-Down or Step-Up Power Supply.
-       * @param returnCallback
-       * @param errorCallback
-       */
-      getStackCurrent(
-        returnCallback?: (current: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      on(id: number, returnCallback: (params: unknown) => void): void;
-    }
+  export class BrickMaster {
+    constructor(uid: string, ipConnection: IPConnection);
+    /**
+     * Returns the stack voltage. The stack voltage is the voltage that is supplied via the stack, i.e. it is given by a Step-Down or Step-Up Power Supply.
+     * @param returnCallback
+     * @param errorCallback
+     */
+    getStackVoltage(
+      returnCallback?: (voltage: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    /**
+     * Returns the stack current. The stack current is the current that is drawn via the stack, i.e. it is given by a Step-Down or Step-Up Power Supply.
+     * @param returnCallback
+     * @param errorCallback
+     */
+    getStackCurrent(
+      returnCallback?: (current: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
   }
 
   export namespace BrickletAmbientLight {
@@ -380,79 +381,79 @@ declare module 'tinkerforge' {
     const THRESHOLD_OPTION_OFF: string;
     const THRESHOLD_OPTION_OUTSIDE: string;
     const THRESHOLD_OPTION_SMALLER: string;
+  }
 
-    class BrickletAmbientLight {
-      constructor(uid: string, ipConnection: IPConnection);
-      getIlluminance(
-        returnCallback?: (illuminance: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValue(
-        returnCallback?: (value: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIdentity(
-        returnCallback?: (
-          uid: string,
-          connectedUid: string,
-          position: string,
-          hardwareVersion: [number],
-          firmwareVersion: [number],
-          deviceIdentifier: number,
-        ) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      on(id: number, returnCallback: (params: unknown) => void): void;
-      setIlluminanceCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIlluminanceCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAnalogValueCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValueCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setIlluminanceCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIlluminanceCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAnalogValueCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValueCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setDebouncePeriod(
-        debounce: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getDebouncePeriod(
-        returnCallback?: (debounce: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-    }
+  export class BrickletAmbientLight {
+    constructor(uid: string, ipConnection: IPConnection);
+    getIlluminance(
+      returnCallback?: (illuminance: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValue(
+      returnCallback?: (value: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIdentity(
+      returnCallback?: (
+        uid: string,
+        connectedUid: string,
+        position: string,
+        hardwareVersion: [number],
+        firmwareVersion: [number],
+        deviceIdentifier: number,
+      ) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
+    setIlluminanceCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIlluminanceCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAnalogValueCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValueCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setIlluminanceCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIlluminanceCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAnalogValueCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValueCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setDebouncePeriod(
+      debounce: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getDebouncePeriod(
+      returnCallback?: (debounce: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
   }
 
   export namespace BrickletHumidity {
@@ -480,79 +481,79 @@ declare module 'tinkerforge' {
     const THRESHOLD_OPTION_OFF: string;
     const THRESHOLD_OPTION_OUTSIDE: string;
     const THRESHOLD_OPTION_SMALLER: string;
+  }
 
-    class BrickletHumidity {
-      constructor(uid: string, ipConnection: IPConnection);
-      getHumidity(
-        returnCallback?: (humidity: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValue(
-        returnCallback?: (value: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIdentity(
-        returnCallback?: (
-          uid: string,
-          connectedUid: string,
-          position: string,
-          hardwareVersion: [number],
-          firmwareVersion: [number],
-          deviceIdentifier: number,
-        ) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      on(id: number, returnCallback: (params: unknown) => void): void;
-      setHumidityCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getHumidityCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAnalogValueCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValueCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setHumidityCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getHumidityCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAnalogValueCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAnalogValueCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setDebouncePeriod(
-        debounce: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getDebouncePeriod(
-        returnCallback?: (debounce: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-    }
+  export class BrickletHumidity {
+    constructor(uid: string, ipConnection: IPConnection);
+    getHumidity(
+      returnCallback?: (humidity: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValue(
+      returnCallback?: (value: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIdentity(
+      returnCallback?: (
+        uid: string,
+        connectedUid: string,
+        position: string,
+        hardwareVersion: [number],
+        firmwareVersion: [number],
+        deviceIdentifier: number,
+      ) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
+    setHumidityCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getHumidityCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAnalogValueCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValueCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setHumidityCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getHumidityCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAnalogValueCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAnalogValueCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setDebouncePeriod(
+      debounce: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getDebouncePeriod(
+      returnCallback?: (debounce: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
   }
 
   export namespace BrickletBarometer {
@@ -585,107 +586,107 @@ declare module 'tinkerforge' {
     const THRESHOLD_OPTION_OFF: string;
     const THRESHOLD_OPTION_OUTSIDE: string;
     const THRESHOLD_OPTION_SMALLER: string;
+  }
 
-    class BrickletBarometer {
-      constructor(uid: string, ipConnection: IPConnection);
-      getAirPressure(
-        returnCallback?: (airPressure: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAltitude(
-        returnCallback?: (altitude: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setReferenceAirPressure(
-        airPressure: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getReferenceAirPressure(
-        returnCallback?: (airPressure: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getChipTemperature(
-        returnCallback?: (temperature: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAveraging(
+  export class BrickletBarometer {
+    constructor(uid: string, ipConnection: IPConnection);
+    getAirPressure(
+      returnCallback?: (airPressure: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAltitude(
+      returnCallback?: (altitude: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setReferenceAirPressure(
+      airPressure: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getReferenceAirPressure(
+      returnCallback?: (airPressure: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getChipTemperature(
+      returnCallback?: (temperature: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAveraging(
+      movingAveragePressure: number,
+      averagePressure: number,
+      averageTemperature: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAveraging(
+      returnCallback?: (
         movingAveragePressure: number,
         averagePressure: number,
         averageTemperature: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAveraging(
-        returnCallback?: (
-          movingAveragePressure: number,
-          averagePressure: number,
-          averageTemperature: number,
-        ) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIdentity(
-        returnCallback?: (
-          uid: string,
-          connectedUid: string,
-          position: string,
-          hardwareVersion: [number],
-          firmwareVersion: [number],
-          deviceIdentifier: number,
-        ) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      on(id: number, returnCallback: (params: unknown) => void): void;
-      setAirPressureCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAirPressureCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAltitudeCallbackPeriod(
-        period: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAltitudeCallbackPeriod(
-        returnCallback?: (period: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAirPressureCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAirPressureCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setAltitudeCallbackThreshold(
-        option: string,
-        min: number,
-        max: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getAltitudeCallbackThreshold(
-        returnCallback?: (option: string, min: number, max: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setDebouncePeriod(
-        debounce: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getDebouncePeriod(
-        returnCallback?: (debounce: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-    }
+      ) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIdentity(
+      returnCallback?: (
+        uid: string,
+        connectedUid: string,
+        position: string,
+        hardwareVersion: [number],
+        firmwareVersion: [number],
+        deviceIdentifier: number,
+      ) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
+    setAirPressureCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAirPressureCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAltitudeCallbackPeriod(
+      period: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAltitudeCallbackPeriod(
+      returnCallback?: (period: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAirPressureCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAirPressureCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setAltitudeCallbackThreshold(
+      option: string,
+      min: number,
+      max: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getAltitudeCallbackThreshold(
+      returnCallback?: (option: string, min: number, max: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setDebouncePeriod(
+      debounce: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getDebouncePeriod(
+      returnCallback?: (debounce: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
   }
 
   export namespace BrickletLCD20x4 {
@@ -708,90 +709,90 @@ declare module 'tinkerforge' {
     const FUNCTION_SET_DEFAULT_TEXT: number;
     const FUNCTION_SET_DEFAULT_TEXT_COUNTER: number;
     const FUNCTION_WRITE_LINE: number;
+  }
 
-    class BrickletLCD20x4 {
-      constructor(uid: string, ipConnection: IPConnection);
-      writeLine(
-        line: number,
-        position: number,
-        text: string,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      clearDisplay(
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      backlightOn(
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      backlightOff(
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      isBacklightOn(
-        returnCallback?: (backlight: boolean) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setConfig(
-        cursor: boolean,
-        blinking: boolean,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getConfig(
-        returnCallback?: (cursor: boolean, blinking: boolean) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      isButtonPressed(
-        button: number,
-        returnCallback?: (pressed: boolean) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setCustomCharacter(
-        index: number,
-        character: [number],
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getCustomCharacter(
-        index: number,
-        returnCallback?: (character: [number]) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setDefaultText(
-        line: number,
-        text: string,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getDefaultText(
-        line: number,
-        returnCallback?: (text: string) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      setDefaultTextCounter(
-        counter: number,
-        returnCallback?: () => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getDefaultTextCounter(
-        returnCallback?: (counter: number) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      getIdentity(
-        returnCallback?: (
-          uid: string,
-          connectedUid: string,
-          position: string,
-          hardwareVersion: [number],
-          firmwareVersion: [number],
-          deviceIdentifier: number,
-        ) => void,
-        errorCallback?: (error: number) => void,
-      ): void;
-      on(id: number, returnCallback: (params: unknown) => void): void;
-    }
+  export class BrickletLCD20x4 {
+    constructor(uid: string, ipConnection: IPConnection);
+    writeLine(
+      line: number,
+      position: number,
+      text: string,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    clearDisplay(
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    backlightOn(
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    backlightOff(
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    isBacklightOn(
+      returnCallback?: (backlight: boolean) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setConfig(
+      cursor: boolean,
+      blinking: boolean,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getConfig(
+      returnCallback?: (cursor: boolean, blinking: boolean) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    isButtonPressed(
+      button: number,
+      returnCallback?: (pressed: boolean) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setCustomCharacter(
+      index: number,
+      character: [number],
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getCustomCharacter(
+      index: number,
+      returnCallback?: (character: [number]) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setDefaultText(
+      line: number,
+      text: string,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getDefaultText(
+      line: number,
+      returnCallback?: (text: string) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    setDefaultTextCounter(
+      counter: number,
+      returnCallback?: () => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getDefaultTextCounter(
+      returnCallback?: (counter: number) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    getIdentity(
+      returnCallback?: (
+        uid: string,
+        connectedUid: string,
+        position: string,
+        hardwareVersion: [number],
+        firmwareVersion: [number],
+        deviceIdentifier: number,
+      ) => void,
+      errorCallback?: (error: number) => void,
+    ): void;
+    on(id: number, returnCallback: (...args: any[]) => void): void;
   }
 }
