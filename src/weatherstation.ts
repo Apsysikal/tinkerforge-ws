@@ -26,7 +26,6 @@ export class WeatherStation extends EventEmitter {
   }
 
   private _onConnect(): void {
-    console.log(this._ipConnection);
     this._ipConnection.enumerate();
   }
 
