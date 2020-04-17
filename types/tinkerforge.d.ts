@@ -687,4 +687,111 @@ declare module 'tinkerforge' {
       ): void;
     }
   }
+
+  export namespace BrickletLCD20x4 {
+    const CALLBACK_BUTTON_PRESSED: number;
+    const CALLBACK_BUTTON_RELEASED: number;
+    const DEVICE_DISPLAY_NAME: string;
+    const DEVICE_IDENTIFIER: number;
+    const FUNCTION_BACKLIGHT_OFF: number;
+    const FUNCTION_BACKLIGHT_ON: number;
+    const FUNCTION_CLEAR_DISPLAY: number;
+    const FUNCTION_GET_CONFIG: number;
+    const FUNCTION_GET_CUSTOM_CHARACTER: number;
+    const FUNCTION_GET_DEFAULT_TEXT: number;
+    const FUNCTION_GET_DEFAULT_TEXT_COUNTER: number;
+    const FUNCTION_GET_IDENTITY: number;
+    const FUNCTION_IS_BACKLIGHT_ON: number;
+    const FUNCTION_IS_BUTTON_PRESSED: number;
+    const FUNCTION_SET_CONFIG: number;
+    const FUNCTION_SET_CUSTOM_CHARACTER: number;
+    const FUNCTION_SET_DEFAULT_TEXT: number;
+    const FUNCTION_SET_DEFAULT_TEXT_COUNTER: number;
+    const FUNCTION_WRITE_LINE: number;
+
+    class BrickletLCD20x4 {
+      constructor(uid: string, ipConnection: IPConnection);
+      writeLine(
+        line: number,
+        position: number,
+        text: string,
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      clearDisplay(
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      backlightOn(
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      backlightOff(
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      isBacklightOn(
+        returnCallback?: (backlight: boolean) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      setConfig(
+        cursor: boolean,
+        blinking: boolean,
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      getConfig(
+        returnCallback?: (cursor: boolean, blinking: boolean) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      isButtonPressed(
+        button: number,
+        returnCallback?: (pressed: boolean) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      setCustomCharacter(
+        index: number,
+        character: [number],
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      getCustomCharacter(
+        index: number,
+        returnCallback?: (character: [number]) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      setDefaultText(
+        line: number,
+        text: string,
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      getDefaultText(
+        line: number,
+        returnCallback?: (text: string) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      setDefaultTextCounter(
+        counter: number,
+        returnCallback?: () => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      getDefaultTextCounter(
+        returnCallback?: (counter: number) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      getIdentity(
+        returnCallback?: (
+          uid: string,
+          connectedUid: string,
+          position: string,
+          hardwareVersion: [number],
+          firmwareVersion: [number],
+          deviceIdentifier: number,
+        ) => void,
+        errorCallback?: (error: number) => void,
+      ): void;
+      on(id: number, returnCallback: (params: unknown) => void): void;
+    }
+  }
 }
