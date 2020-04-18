@@ -1,10 +1,12 @@
-import { IPConnection } from 'tinkerforge';
+import { IPConnection, BrickletLCD20x4 } from 'tinkerforge';
 import { EventEmitter } from 'events';
+import { Display } from './display';
 
 export class WeatherStation extends EventEmitter {
   private _host: string;
   private _port: number;
   private _ipConnection: IPConnection;
+  display: undefined | Display;
 
   constructor(host?: string, port?: number) {
     super();
@@ -38,12 +40,30 @@ export class WeatherStation extends EventEmitter {
     deviceIdentifier: number,
     enumerationType: number,
   ): void {
-    console.log(`UID: ${uid}`);
-    console.log(`Connected UID: ${connectedUid}`);
-    console.log(`Position: ${position}`);
-    console.log(`Hardware Version: ${hardwareVersion}`);
-    console.log(`Firmware Version: ${firmwareVersion}`);
-    console.log(`Device Identifier: ${deviceIdentifier}`);
-    console.log(`Enumeration Type: ${enumerationType}`);
+    switch (deviceIdentifier) {
+      case BrickletLCD20x4.DEVICE_IDENTIFIER:
+        this.display = new Display(
+          uid,
+          connectedUid,
+          position,
+          hardwareVersion,
+          firmwareVersion,
+          this._ipConnection,
+        );
+        break;
+
+      default:
+        console.warn([
+          'No initializer for the device with the following parameter:',
+          `UID: ${uid}`,
+          `Connected UID: ${connectedUid}`,
+          `Position: ${position}`,
+          `Hardware Version: ${hardwareVersion}`,
+          `Firmware Version: ${firmwareVersion}`,
+          `Device Identifier: ${deviceIdentifier}`,
+          `Enumeration Type: ${enumerationType}`,
+        ]);
+        break;
+    }
   }
 }
