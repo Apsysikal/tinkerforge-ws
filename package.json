@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Caserage/tinkerforge-ws#readme",
   "dependencies": {
-    "tinkerforge": "^2.1.26"
+    "tinkerforge": "^2.1.27"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
