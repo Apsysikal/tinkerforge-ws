@@ -1,12 +1,12 @@
-import { IPConnection, BrickletLCD20x4 } from 'tinkerforge';
+import { IPConnection } from 'tinkerforge';
 import { EventEmitter } from 'events';
-import { Display } from './display';
+import { BrickletLCD20x4 } from './BrickletLCD20x4';
 
 export class WeatherStation extends EventEmitter {
   private _host: string;
   private _port: number;
   private _ipConnection: IPConnection;
-  display: undefined | Display;
+  display: undefined | BrickletLCD20x4;
 
   constructor(host?: string, port?: number) {
     super();
@@ -42,14 +42,10 @@ export class WeatherStation extends EventEmitter {
   ): void {
     switch (deviceIdentifier) {
       case BrickletLCD20x4.DEVICE_IDENTIFIER:
-        this.display = new Display(
-          uid,
-          connectedUid,
-          position,
-          hardwareVersion,
-          firmwareVersion,
-          this._ipConnection,
-        );
+        this.display = new BrickletLCD20x4(uid, this._ipConnection);
+        this.display.on('buttonPressed', (button) => {
+          console.log(`Button ${button} pressed`);
+        });
         break;
 
       default:
