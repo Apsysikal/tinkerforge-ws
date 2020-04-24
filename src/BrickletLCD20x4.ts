@@ -1,7 +1,5 @@
-import {
-  IPConnection,
-  BrickletLCD20x4 as TFBrickletLCD20x4,
-} from 'tinkerforge';
+import { BrickletLCD20x4 as TFBrickletLCD20x4 } from 'tinkerforge';
+import { IPConnection } from './IPConnection';
 import { EventEmitter } from 'events';
 
 export interface BrickletLCD20x4 {
@@ -12,17 +10,16 @@ export interface BrickletLCD20x4 {
 export class BrickletLCD20x4 extends EventEmitter {
   private _originalBricklet: TFBrickletLCD20x4;
 
-  public static CALLBACK_BUTTON_PRESSED =
-    TFBrickletLCD20x4.CALLBACK_BUTTON_PRESSED;
-  public static CALLBACK_BUTTON_RELEASED =
-    TFBrickletLCD20x4.CALLBACK_BUTTON_RELEASED;
   public static DEVICE_DISPLAY_NAME = TFBrickletLCD20x4.DEVICE_DISPLAY_NAME;
   public static DEVICE_IDENTIFIER = TFBrickletLCD20x4.DEVICE_IDENTIFIER;
 
   constructor(uid: string, ipConnection: IPConnection) {
     super();
 
-    this._originalBricklet = new TFBrickletLCD20x4(uid, ipConnection);
+    this._originalBricklet = new TFBrickletLCD20x4(
+      uid,
+      ipConnection.originalIPConnection,
+    );
     this._originalBricklet.on(
       TFBrickletLCD20x4.CALLBACK_BUTTON_PRESSED,
       this._onButtonPressed.bind(this),

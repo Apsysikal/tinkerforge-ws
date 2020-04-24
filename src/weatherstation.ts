@@ -1,4 +1,4 @@
-import { IPConnection } from 'tinkerforge';
+import { IPConnection } from './IPConnection';
 import { EventEmitter } from 'events';
 import { BrickletLCD20x4 } from './BrickletLCD20x4';
 
@@ -16,14 +16,8 @@ export class WeatherStation extends EventEmitter {
   }
 
   initialize(): void {
-    this._ipConnection.on(
-      IPConnection.CALLBACK_CONNECTED,
-      this._onConnect.bind(this),
-    );
-    this._ipConnection.on(
-      IPConnection.CALLBACK_ENUMERATE,
-      this._onEnumerate.bind(this),
-    );
+    this._ipConnection.on('connected', this._onConnect.bind(this));
+    this._ipConnection.on('enumerate', this._onEnumerate.bind(this));
     this._ipConnection.connect(this._host, this._port);
   }
 
@@ -35,8 +29,8 @@ export class WeatherStation extends EventEmitter {
     uid: string,
     connectedUid: string,
     position: string,
-    hardwareVersion: [number],
-    firmwareVersion: [number],
+    hardwareVersion: [number, number, number],
+    firmwareVersion: [number, number, number],
     deviceIdentifier: number,
     enumerationType: number,
   ): void {
