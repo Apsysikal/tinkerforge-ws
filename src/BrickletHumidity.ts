@@ -12,6 +12,9 @@ export interface BrickletAmbientLight {
 export class BrickletHumidity extends EventEmitter {
   private _originalBricklet: TFBrickletHumidity;
 
+  public static DEVICE_DISPLAY_NAME = TFBrickletHumidity.DEVICE_DISPLAY_NAME;
+  public static DEVICE_IDENTIFIER = TFBrickletHumidity.DEVICE_IDENTIFIER;
+
   constructor(uid: string, ipConnection: IPConnection) {
     super();
 

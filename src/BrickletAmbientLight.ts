@@ -15,6 +15,10 @@ export interface BrickletAmbientLight {
 export class BrickletAmbientLight extends EventEmitter {
   private _originalBricklet: TFBrickletAmbientLight;
 
+  public static DEVICE_DISPLAY_NAME =
+    TFBrickletAmbientLight.DEVICE_DISPLAY_NAME;
+  public static DEVICE_IDENTIFIER = TFBrickletAmbientLight.DEVICE_IDENTIFIER;
+
   constructor(uid: string, ipConnection: IPConnection) {
     super();
 
