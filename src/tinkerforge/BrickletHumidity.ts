@@ -2,7 +2,7 @@ import { BrickletHumidity as TFBrickletHumidity } from 'tinkerforge';
 import { IPConnection } from './IPConnection';
 import { EventEmitter } from 'events';
 
-export interface BrickletAmbientLight {
+export interface BrickletHumidity {
   on(event: 'humidity', listener: (humidity: number) => void): this;
   on(event: 'analogValue', listener: (value: number) => void): this;
   on(event: 'humidityReached', listener: (humidity: number) => void): this;

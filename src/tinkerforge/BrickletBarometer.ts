@@ -2,7 +2,7 @@ import { BrickletBarometer as TFBrickletBarometer } from 'tinkerforge';
 import { IPConnection } from './IPConnection';
 import { EventEmitter } from 'events';
 
-export interface BrickletAmbientLight {
+export interface BrickletBarometer {
   on(event: 'airPressure', listener: (airPressure: number) => void): this;
   on(event: 'altitude', listener: (altitude: number) => void): this;
   on(

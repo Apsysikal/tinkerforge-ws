@@ -1,12 +1,18 @@
-import { IPConnection } from './IPConnection';
 import { EventEmitter } from 'events';
-import { BrickletLCD20x4 } from './BrickletLCD20x4';
+import { IPConnection } from './tinkerforge/IPConnection';
+import { BrickletLCD20x4 } from './tinkerforge/BrickletLCD20x4';
+import { BrickletAmbientLight } from './tinkerforge/BrickletAmbientLight';
+import { BrickletBarometer } from './tinkerforge/BrickletBarometer';
+import { BrickletHumidity } from './tinkerforge/BrickletHumidity';
 
 export class WeatherStation extends EventEmitter {
   private _host: string;
   private _port: number;
   private _ipConnection: IPConnection;
   display: undefined | BrickletLCD20x4;
+  ambientLightSensor: undefined | BrickletAmbientLight;
+  barometerSensor: undefined | BrickletBarometer;
+  humiditySensor: undefined | BrickletHumidity;
 
   constructor(host?: string, port?: number) {
     super();
@@ -39,6 +45,33 @@ export class WeatherStation extends EventEmitter {
         this.display = new BrickletLCD20x4(uid, this._ipConnection);
         this.display.on('buttonPressed', (button) => {
           console.log(`Button ${button} pressed`);
+        });
+        break;
+
+      case BrickletAmbientLight.DEVICE_IDENTIFIER:
+        this.ambientLightSensor = new BrickletAmbientLight(
+          uid,
+          this._ipConnection,
+        );
+        this.ambientLightSensor.on('illuminance', (illuminance: number) => {
+          console.log(`Illuminance: ${illuminance} lx`);
+        });
+        break;
+
+      case BrickletBarometer.DEVICE_IDENTIFIER:
+        this.barometerSensor = new BrickletBarometer(uid, this._ipConnection);
+        this.barometerSensor.on('airPressure', (airPressure: number) => {
+          console.log(`Air Pressure: ${airPressure} hpa`);
+        });
+        this.barometerSensor.on('altitude', (altitude: number) => {
+          console.log(`Altitude: ${altitude} maS`);
+        });
+        break;
+
+      case BrickletHumidity.DEVICE_IDENTIFIER:
+        this.humiditySensor = new BrickletHumidity(uid, this._ipConnection);
+        this.humiditySensor.on('humidity', (humidity: number) => {
+          console.log(`Humidity: ${humidity} %rH`);
         });
         break;
 
