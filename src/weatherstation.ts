@@ -46,6 +46,7 @@ export class WeatherStation extends EventEmitter {
         this.display.on('buttonPressed', (button) => {
           console.log(`Button ${button} pressed`);
         });
+
         break;
 
       case BrickletAmbientLight.DEVICE_IDENTIFIER:
@@ -54,25 +55,45 @@ export class WeatherStation extends EventEmitter {
           this._ipConnection,
         );
         this.ambientLightSensor.on('illuminance', (illuminance: number) => {
-          console.log(`Illuminance: ${illuminance} lx`);
+          console.log(`Illuminance: ${illuminance / 10.0} lx`);
         });
+        this.ambientLightSensor
+          .setIlluminanceCallbackPeriod(1000 * 15)
+          .catch((error) => {
+            console.error(error);
+          });
         break;
 
       case BrickletBarometer.DEVICE_IDENTIFIER:
         this.barometerSensor = new BrickletBarometer(uid, this._ipConnection);
         this.barometerSensor.on('airPressure', (airPressure: number) => {
-          console.log(`Air Pressure: ${airPressure} hpa`);
+          console.log(`Air Pressure: ${airPressure / 1000.0} hpa`);
         });
         this.barometerSensor.on('altitude', (altitude: number) => {
-          console.log(`Altitude: ${altitude} maS`);
+          console.log(`Altitude: ${altitude / 100.0} maS`);
         });
+        this.barometerSensor
+          .setAirPressureCallbackPeriod(1000 * 15)
+          .catch((error) => {
+            console.error(error);
+          });
+        this.barometerSensor
+          .setAltitudeCallbackPeriod(1000 * 15)
+          .catch((error) => {
+            console.error(error);
+          });
         break;
 
       case BrickletHumidity.DEVICE_IDENTIFIER:
         this.humiditySensor = new BrickletHumidity(uid, this._ipConnection);
         this.humiditySensor.on('humidity', (humidity: number) => {
-          console.log(`Humidity: ${humidity} %rH`);
+          console.log(`Humidity: ${humidity / 10.0} %rH`);
         });
+        this.humiditySensor
+          .setHumidityCallbackPeriod(1000 * 15)
+          .catch((error) => {
+            console.error(error);
+          });
         break;
 
       default:

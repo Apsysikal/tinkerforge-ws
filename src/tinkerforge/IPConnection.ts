@@ -141,15 +141,16 @@ export class IPConnection extends EventEmitter {
     enumerationType: number,
   ): void {
     if (this.listenerCount('enumerate') >= 0) {
-      this.emit('enumerate', {
-        uid: uid,
-        connectedUid: connectedUid,
-        position: position,
-        hardwareVersion: hardwareVersion,
-        firmwareVersion: firmwareVersion,
-        deviceIdentifier: deviceIdentifier,
-        enumerationType: enumerationType,
-      });
+      this.emit(
+        'enumerate',
+        uid,
+        connectedUid,
+        position,
+        hardwareVersion,
+        firmwareVersion,
+        deviceIdentifier,
+        enumerationType,
+      );
     }
   }
 }
