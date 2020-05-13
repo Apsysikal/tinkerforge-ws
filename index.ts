@@ -72,7 +72,7 @@ async function onEnumerate(
       brickletAmbientLight.on('illuminance', (rawIlluminance: number) => {
         illuminance = rawIlluminance / 10.0;
       });
-      await brickletAmbientLight.setIlluminanceCallbackPeriod(1000);
+      await brickletAmbientLight.setIlluminanceCallbackPeriod(1000 * 15);
     }
     if (deviceIdentifier === BrickletBarometer.DEVICE_IDENTIFIER) {
       brickletBarometer = new BrickletBarometer(uid, connection);
@@ -81,20 +81,20 @@ async function onEnumerate(
         chipTemperature =
           (await brickletBarometer.getChipTemperature()) / 100.0;
       });
-      await brickletBarometer.setAirPressureCallbackPeriod(1000);
+      await brickletBarometer.setAirPressureCallbackPeriod(1000 * 15);
     }
     if (deviceIdentifier === BrickletHumidity.DEVICE_IDENTIFIER) {
       brickletHumidity = new BrickletHumidity(uid, connection);
       brickletHumidity.on('humidity', (rawHumidity: number) => {
         humidity = rawHumidity / 10.0;
       });
-      brickletHumidity.setHumidityCallbackPeriod(1000);
+      brickletHumidity.setHumidityCallbackPeriod(1000 * 15);
     }
     if (deviceIdentifier === BrickletLCD20x4.DEVICE_IDENTIFIER) {
       brickletDisplay = new BrickletLCD20x4(uid, connection);
       await brickletDisplay.clearDisplay();
       await brickletDisplay.backlightOn();
-      displayInterval = setInterval(updateDisplay, 1000);
+      displayInterval = setInterval(updateDisplay, 1000 * 15);
       currentlyUpdating = true;
     }
 
